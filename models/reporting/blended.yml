@@ -1,1 +1,27 @@
 version: 2
+
+sources: 
+
+- name: utilities
+  schema: utilities
+  tables:
+    - name: dates
+      identifier: dates
+
+- name: reporting
+  schema: reporting
+  tables:
+    - name: facebook_ad_performance
+      identifier: mara_facebook_ad_performance
+
+    - name: facebook_campaign_performance
+      identifier: mara_facebook_campaign_performance
+
+    - name: googleads_campaign_performance
+      identifier: mara_googleads_campaign_performance
+
+    - name: shopify_daily_sales_by_order
+      identifier: mara_shopify_daily_sales_by_order
+
+    - name: shopify_daily_refunds
+      identifier: mara_shopify_daily_refunds
