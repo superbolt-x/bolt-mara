@@ -59,6 +59,7 @@ paid_data as
 sho_data as
     (SELECT
             'Shopify' as channel,
+            '(not set)' as campaign_id,
             '(not set)' as campaign_name,
             date,
             date_granularity,
@@ -78,6 +79,7 @@ sho_data as
     
 SELECT 
     channel,
+    campaign_id,
     campaign_name,
     date,
     date_granularity,
