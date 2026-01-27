@@ -11,7 +11,7 @@ WITH orders AS (
   AND order_tags !~* 'TEST'
   AND order_tags !~* 'ShopMy Gifting'
   AND order_tags !~* 'SEND OUT'
-)
+),
   
   refund_order_data AS
     (SELECT date, day, week, month, quarter, year, 
