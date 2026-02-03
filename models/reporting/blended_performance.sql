@@ -42,25 +42,27 @@ WITH orders AS (
     ),
     
 paid_data as
-    (SELECT channel, campaign_id::varchar as campaign_id, campaign_name, date::date, date_granularity, COALESCE(SUM(spend),0) as spend, COALESCE(SUM(clicks),0) as clicks, 
+    (SELECT channel, campaign_id::varchar as campaign_id, campaign_name, adset_id::varchar as adset_id, adset_name, date::date, date_granularity, COALESCE(SUM(spend),0) as spend, COALESCE(SUM(clicks),0) as clicks, 
         COALESCE(SUM(impressions),0) as impressions, COALESCE(SUM(paid_purchases),0) as paid_purchases, COALESCE(SUM(paid_revenue),0) as paid_revenue, 
         0 as shopify_first_orders, 0 as shopify_orders, 0 as shopify_first_sales, 0 as shopify_sales, 0 as shopify_first_net_sales, 0 as shopify_net_sales
     FROM
-        (SELECT 'Meta' as channel, campaign_id::varchar as campaign_id, campaign_name, date, date_granularity, 
+        (SELECT 'Meta' as channel, campaign_id::varchar as campaign_id, campaign_name, adset_id::varchar as adset_id, adset_name, date, date_granularity, 
             spend, link_clicks as clicks, impressions, purchases as paid_purchases, revenue as paid_revenue
-        FROM {{ source('reporting','facebook_campaign_performance') }}
+        FROM {{ source('reporting','facebook_ad_performance') }}
         UNION ALL
-        SELECT 'Google Ads' as channel, campaign_id::varchar as campaign_id, campaign_name, date, date_granularity,
+        SELECT 'Google Ads' as channel, campaign_id::varchar as campaign_id, campaign_name, '(not set)' as adset_id, '(not set)' as adset_name, date, date_granularity,
             spend, clicks, impressions, purchases as paid_purchases, revenue as paid_revenue
         FROM {{ source('reporting','googleads_campaign_performance') }}
         )
-    GROUP BY channel, campaign_id, campaign_name, date, date_granularity),
+    GROUP BY channel, campaign_id, campaign_name, adset_id, adset_name, date, date_granularity),
 
 sho_data as
     (SELECT
             'Shopify' as channel,
             '(not set)' as campaign_id,
             '(not set)' as campaign_name,
+            '(not set)' as adset_id,
+            '(not set)' as adset_name,
             date,
             date_granularity,
             0 as spend,
@@ -81,6 +83,8 @@ SELECT
     channel,
     campaign_id,
     campaign_name,
+    adset_id,
+    adset_name,
     date,
     date_granularity,
     spend,
