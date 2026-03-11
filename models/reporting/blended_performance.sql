@@ -7,10 +7,7 @@
 
 WITH orders AS (
   SELECT order_id FROM {{ source('reporting','shopify_daily_sales_by_order') }}
-  WHERE order_tags !~* 'GIFTING'
-  AND order_tags !~* 'TEST'
-  AND order_tags !~* 'ShopMy Gifting'
-  AND order_tags !~* 'SEND OUT'
+  WHERE (order_tags !~* 'GIFTING' AND order_tags !~* 'TEST' AND order_tags !~* 'ShopMy Gifting' AND order_tags !~* 'SEND OUT') OR (order_tags is null)
 ),
   
   refund_order_data AS
