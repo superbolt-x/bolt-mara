@@ -32,9 +32,9 @@ WITH orders AS (
             COUNT(DISTINCT order_id) as shopify_orders, 
             COUNT(DISTINCT CASE WHEN customer_order_index = 1 THEN order_id END) as shopify_first_orders,
             SUM(COALESCE(gross_revenue,0)-COALESCE(subtotal_discount,0)+COALESCE(total_tax,0)+COALESCE(shipping_price,0)-COALESCE(shipping_discount,0)) as shopify_sales,
-            SUM(CASE WHEN customer_order_index = 1 THEN COALESCE(gross_revenue,0)-COALESCE(subtotal_discount,0)+COALESCE(total_tax,0)+COALESCE(shipping_price,0)-COALESCE(shipping_discount,0) END) as shopify_first_sales,
+            SUM(CASE WHEN customer_order_index = 1 THEN COALESCE(gross_revenue,0)-COALESCE(subtotal_discount,0)+COALESCE(total_tax,0)+COALESCE(shipping_price,0)-COALESCE(shipping_discount,0) ELSE 0 END) as shopify_first_sales,
             SUM(COALESCE(subtotal_refund,0)-COALESCE(shipping_refund,0)+COALESCE(tax_refund,0)) as shopify_refund,
-            SUM(CASE WHEN customer_order_index = 1 THEN COALESCE(subtotal_refund,0)-COALESCE(shipping_refund,0)+COALESCE(tax_refund,0) END) as shopify_first_refund
+            SUM(CASE WHEN customer_order_index = 1 THEN COALESCE(subtotal_refund,0)-COALESCE(shipping_refund,0)+COALESCE(tax_refund,0) ELSE 0 END) as shopify_first_refund
         FROM refund_order_data
         GROUP BY date_granularity, {{granularity}}
         {% if not loop.last %}UNION ALL{% endif %}
