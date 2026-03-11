@@ -87,17 +87,17 @@ SELECT
     adset_name,
     date,
     date_granularity,
-    sum(coalesce(spend,0) AS spend,
-    sum(coalesce(clicks,0) AS clicks,
-    sum(coalesce(impressions,0) AS impressions,
-    sum(coalesce(paid_purchases,0) AS paid_purchases,
-    sum(coalesce(paid_revenue,0) AS paid_revenue,
-    sum(coalesce(shopify_first_orders,0) AS shopify_first_orders,
-    sum(coalesce(shopify_orders,0) AS shopify_orders,
-    sum(coalesce(shopify_first_sales,0) AS shopify_first_sales,
-    sum(coalesce(shopify_sales,0) AS shopify_sales,
-    sum(coalesce(shopify_first_net_sales,0) AS shopify_first_net_sales,
-    sum(coalesce(shopify_net_sales,0) AS shopify_net_sales
+    sum(coalesce(spend,0)) AS spend,
+    sum(coalesce(clicks,0)) AS clicks,
+    sum(coalesce(impressions,0)) AS impressions,
+    sum(coalesce(paid_purchases,0)) AS paid_purchases,
+    sum(coalesce(paid_revenue,0)) AS paid_revenue,
+    sum(coalesce(shopify_first_orders,0)) AS shopify_first_orders,
+    sum(coalesce(shopify_orders,0)) AS shopify_orders,
+    sum(coalesce(shopify_first_sales,0)) AS shopify_first_sales,
+    sum(coalesce(shopify_sales,0)) AS shopify_sales,
+    sum(coalesce(shopify_first_net_sales,0)) AS shopify_first_net_sales,
+    sum(coalesce(shopify_net_sales,0)) AS shopify_net_sales
 FROM (
     SELECT * FROM paid_data
     UNION ALL 
