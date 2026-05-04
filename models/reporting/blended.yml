@@ -20,8 +20,8 @@ sources:
     - name: googleads_campaign_performance
       identifier: mara_googleads_campaign_performance
 
-    - name: tiktok_campaign_performance
-      identifier: mara_tiktok_campaign_performance
+    - name: tiktok_ad_performance
+      identifier: mara_tiktok_ad_performance
 
     - name: shopify_sales
       identifier: mara_shopify_sales
