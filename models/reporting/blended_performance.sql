@@ -15,6 +15,10 @@ paid_data as
         SELECT 'Google Ads' as channel, campaign_id::varchar as campaign_id, campaign_name, '(not set)' as adset_id, '(not set)' as adset_name, date, date_granularity,
             spend, clicks, impressions, purchases as paid_purchases, revenue as paid_revenue
         FROM {{ source('reporting','googleads_campaign_performance') }}
+        UNION ALL
+        SELECT 'Tiktok' as channel, campaign_id::varchar as campaign_id, campaign_name, '(not set)' as adset_id, '(not set)' as adset_name, date, date_granularity,
+            spend, clicks, impressions, purchases as paid_purchases, revenue as paid_revenue
+        FROM {{ source('reporting','tiktok_campaign_performance') }}
         )
     GROUP BY channel, campaign_id, campaign_name, adset_id, adset_name, date, date_granularity),
 
