@@ -9,7 +9,7 @@ packages:
     revision: main
 
   - git: "https://github.com/superbolt-x/bolt-dbt-shopify-package.git"
-    revision: main
+    revision: cohort-model-franco
 
   - git: "https://github.com/superbolt-x/bolt-dbt-tiktok-package.git"
     revision: main
